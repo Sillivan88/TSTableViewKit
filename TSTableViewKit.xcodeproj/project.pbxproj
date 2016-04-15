@@ -8,12 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		E9FD4B541CC0CF1D0023A343 /* TSTableViewKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E9FD4B531CC0CF1D0023A343 /* TSTableViewKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9FD4B5E1CC0CF2E0023A343 /* TSTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FD4B5B1CC0CF2E0023A343 /* TSTableView.swift */; };
+		E9FD4B5F1CC0CF2E0023A343 /* TSTableViewCellCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FD4B5C1CC0CF2E0023A343 /* TSTableViewCellCoordinate.swift */; };
+		E9FD4B601CC0CF2E0023A343 /* TSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FD4B5D1CC0CF2E0023A343 /* TSTableViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E9FD4B501CC0CF1D0023A343 /* TSTableViewKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TSTableViewKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9FD4B531CC0CF1D0023A343 /* TSTableViewKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTableViewKit.h; sourceTree = "<group>"; };
 		E9FD4B551CC0CF1D0023A343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9FD4B5B1CC0CF2E0023A343 /* TSTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTableView.swift; sourceTree = "<group>"; };
+		E9FD4B5C1CC0CF2E0023A343 /* TSTableViewCellCoordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTableViewCellCoordinate.swift; sourceTree = "<group>"; };
+		E9FD4B5D1CC0CF2E0023A343 /* TSTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTableViewDelegate.swift; sourceTree = "<group>"; };
+		E9FD4B611CC0D0EB0023A343 /* TSTableViewKit.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TSTableViewKit.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +54,10 @@
 			isa = PBXGroup;
 			children = (
 				E9FD4B531CC0CF1D0023A343 /* TSTableViewKit.h */,
+				E9FD4B5B1CC0CF2E0023A343 /* TSTableView.swift */,
+				E9FD4B5C1CC0CF2E0023A343 /* TSTableViewCellCoordinate.swift */,
+				E9FD4B5D1CC0CF2E0023A343 /* TSTableViewDelegate.swift */,
+				E9FD4B611CC0D0EB0023A343 /* TSTableViewKit.playground */,
 				E9FD4B551CC0CF1D0023A343 /* Info.plist */,
 			);
 			path = TSTableViewKit;
@@ -130,6 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9FD4B5F1CC0CF2E0023A343 /* TSTableViewCellCoordinate.swift in Sources */,
+				E9FD4B601CC0CF2E0023A343 /* TSTableViewDelegate.swift in Sources */,
+				E9FD4B5E1CC0CF2E0023A343 /* TSTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +244,7 @@
 		E9FD4B591CC0CF1D0023A343 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -240,12 +255,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.thomassillmann.TSTableViewKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		E9FD4B5A1CC0CF1D0023A343 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
