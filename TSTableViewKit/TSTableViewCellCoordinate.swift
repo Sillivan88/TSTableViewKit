@@ -8,11 +8,11 @@
 
 import UIKit
 
-@objc public class TSTableViewCellCoordinate: NSObject {
+@objc open class TSTableViewCellCoordinate: NSObject {
     
-    public var columnIndex: TSTableViewColumnIndex
+    open var columnIndex: TSTableViewColumnIndex
     
-    public var rowIndex: TSTableViewRowIndex
+    open var rowIndex: TSTableViewRowIndex
     
     public init(columnIndex: TSTableViewColumnIndex, rowIndex: TSTableViewRowIndex) {
         self.columnIndex = columnIndex

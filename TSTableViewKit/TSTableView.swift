@@ -12,7 +12,7 @@ public typealias TSTableViewRowIndex = Int
 
 import UIKit
 
-public class TSTableView: UIScrollView {
+open class TSTableView: UIScrollView {
     
     var tableViewDelegate: TSTableViewDelegate? {
         didSet {
@@ -20,36 +20,36 @@ public class TSTableView: UIScrollView {
         }
     }
     
-    private let defaultTableViewColumnWidth: CGFloat = 200
+    fileprivate let defaultTableViewColumnWidth: CGFloat = 200
     
-    private let defaultTableViewCellIndention: CGFloat = 8
+    fileprivate let defaultTableViewCellIndention: CGFloat = 8
     
-    private let defaultTableViewHeaderHeight: CGFloat = 44
+    fileprivate let defaultTableViewHeaderHeight: CGFloat = 44
     
-    private var tableViewHeaderLabels = [UILabel]()
+    fileprivate var tableViewHeaderLabels = [UILabel]()
     
-    private let defaultTableViewRowHeight: CGFloat = 44
+    fileprivate let defaultTableViewRowHeight: CGFloat = 44
     
-    private lazy var rowWidth: CGFloat = {
+    fileprivate lazy var rowWidth: CGFloat = {
         return self.calculatedRowWidth()
     }()
     
-    private let defaultTableViewBackgroundColorForEvenRow = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+    fileprivate let defaultTableViewBackgroundColorForEvenRow = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
     
-    private let defaultTableViewBackgroundColorForUnevenRow = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+    fileprivate let defaultTableViewBackgroundColorForUnevenRow = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
     
-    private var tableViewRowViews = [UIView]()
+    fileprivate var tableViewRowViews = [UIView]()
     
-    private var tableViewCellViews = [UIView]()
+    fileprivate var tableViewCellViews = [UIView]()
     
-    public func widthForColumnAtIndex(index: TSTableViewColumnIndex) -> CGFloat {
+    open func widthForColumnAtIndex(_ index: TSTableViewColumnIndex) -> CGFloat {
         if let columnWidth = tableViewDelegate!.tableView?(self, widthForColumnAtIndex: index) {
             return columnWidth
         }
         return defaultTableViewColumnWidth
     }
     
-    public func xValueForColumnAtIndex(index: TSTableViewColumnIndex) -> CGFloat {
+    open func xValueForColumnAtIndex(_ index: TSTableViewColumnIndex) -> CGFloat {
         var columnXValue: CGFloat = 0
         for previousIndex in 0 ..< index {
             let previousColumnWidth = widthForColumnAtIndex(previousIndex)
@@ -58,27 +58,27 @@ public class TSTableView: UIScrollView {
         return columnXValue
     }
     
-    private func createHeaderViews() {
+    fileprivate func createHeaderViews() {
         for index in 0 ..< tableViewDelegate!.numberOfColumnsInTableView(self) {
             createHeaderLabelForColumnAtIndex(index)
         }
     }
     
-    private func createHeaderLabelForColumnAtIndex(index: TSTableViewColumnIndex) {
-        let headerLabel = UILabel(frame: CGRectMake(xValueForColumnAtIndex(index) + defaultTableViewCellIndention, 0, widthForColumnAtIndex(index) - defaultTableViewCellIndention * 2, defaultTableViewHeaderHeight))
-        headerLabel.font = UIFont.boldSystemFontOfSize(17)
+    fileprivate func createHeaderLabelForColumnAtIndex(_ index: TSTableViewColumnIndex) {
+        let headerLabel = UILabel(frame: CGRect(x: xValueForColumnAtIndex(index) + defaultTableViewCellIndention, y: 0, width: widthForColumnAtIndex(index) - defaultTableViewCellIndention * 2, height: defaultTableViewHeaderHeight))
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 17)
         headerLabel.text = tableViewDelegate!.tableView(self, titleForColumnHeaderAtIndex: index)
         tableViewHeaderLabels.append(headerLabel)
     }
     
-    public func heightForRowAtIndex(index: TSTableViewRowIndex) -> CGFloat {
+    open func heightForRowAtIndex(_ index: TSTableViewRowIndex) -> CGFloat {
         if let heightForRowAtIndex = tableViewDelegate!.tableView?(self, heightForRowAtIndex: index) {
             return heightForRowAtIndex
         }
         return defaultTableViewRowHeight
     }
     
-    public func yValueForRowAtIndex(index: TSTableViewRowIndex) -> CGFloat {
+    open func yValueForRowAtIndex(_ index: TSTableViewRowIndex) -> CGFloat {
         var rowYValue = defaultTableViewHeaderHeight
         for previousIndex in 0 ..< index {
             let previousRowHeight = heightForRowAtIndex(previousIndex)
@@ -87,7 +87,7 @@ public class TSTableView: UIScrollView {
         return rowYValue
     }
     
-    private func calculatedRowWidth() -> CGFloat {
+    fileprivate func calculatedRowWidth() -> CGFloat {
         var rowWidth: CGFloat = 0
         for columnIndex in 0 ..< tableViewDelegate!.numberOfColumnsInTableView(self) {
             let columnWidth = widthForColumnAtIndex(columnIndex)
@@ -96,26 +96,26 @@ public class TSTableView: UIScrollView {
         return rowWidth
     }
     
-    private func createRows() {
+    fileprivate func createRows() {
         for index in 0 ..< tableViewDelegate!.numberOfRowsInTableView(self) {
             createRowViewAtIndex(index)
         }
     }
     
-    private func createRowViewAtIndex(index: TSTableViewRowIndex) {
-        let rowView = UIView(frame: CGRectMake(0, yValueForRowAtIndex(index), rowWidth, heightForRowAtIndex(index)))
+    fileprivate func createRowViewAtIndex(_ index: TSTableViewRowIndex) {
+        let rowView = UIView(frame: CGRect(x: 0, y: yValueForRowAtIndex(index), width: rowWidth, height: heightForRowAtIndex(index)))
         rowView.backgroundColor = backgroundColorForRowAtIndex(index)
         tableViewRowViews.append(rowView)
     }
     
-    private func backgroundColorForRowAtIndex(index: TSTableViewRowIndex) -> UIColor {
+    fileprivate func backgroundColorForRowAtIndex(_ index: TSTableViewRowIndex) -> UIColor {
         if index % 2 == 0 {
             return defaultTableViewBackgroundColorForEvenRow
         }
         return defaultTableViewBackgroundColorForUnevenRow
     }
     
-    private func createCells() {
+    fileprivate func createCells() {
         for rowIndex in 0 ..< tableViewDelegate!.numberOfRowsInTableView(self) {
             for columnIndex in 0 ..< tableViewDelegate!.numberOfColumnsInTableView(self) {
                 createCellViewForCellWithCoordinates(TSTableViewCellCoordinate(columnIndex: columnIndex, rowIndex: rowIndex))
@@ -123,7 +123,7 @@ public class TSTableView: UIScrollView {
         }
     }
     
-    private func createCellViewForCellWithCoordinates(cellCoordinates: TSTableViewCellCoordinate) {
+    fileprivate func createCellViewForCellWithCoordinates(_ cellCoordinates: TSTableViewCellCoordinate) {
         if let cellView = tableViewDelegate!.tableView?(self, viewForCellWithCoordinates: cellCoordinates) {
             tableViewCellViews.append(cellView)
             return
@@ -131,15 +131,15 @@ public class TSTableView: UIScrollView {
         createLabelForCellWithCoordinates(cellCoordinates)
     }
     
-    private func createLabelForCellWithCoordinates(cellCoordinates: TSTableViewCellCoordinate) {
-        let cellView = UIView(frame: CGRectMake(xValueForColumnAtIndex(cellCoordinates.columnIndex), yValueForRowAtIndex(cellCoordinates.rowIndex), widthForColumnAtIndex(cellCoordinates.columnIndex), heightForRowAtIndex(cellCoordinates.rowIndex)))
-        let cellLabel = UILabel(frame: CGRectMake(defaultTableViewCellIndention, 0, widthForColumnAtIndex(cellCoordinates.columnIndex) - defaultTableViewCellIndention * 2, heightForRowAtIndex(cellCoordinates.rowIndex)))
+    fileprivate func createLabelForCellWithCoordinates(_ cellCoordinates: TSTableViewCellCoordinate) {
+        let cellView = UIView(frame: CGRect(x: xValueForColumnAtIndex(cellCoordinates.columnIndex), y: yValueForRowAtIndex(cellCoordinates.rowIndex), width: widthForColumnAtIndex(cellCoordinates.columnIndex), height: heightForRowAtIndex(cellCoordinates.rowIndex)))
+        let cellLabel = UILabel(frame: CGRect(x: defaultTableViewCellIndention, y: 0, width: widthForColumnAtIndex(cellCoordinates.columnIndex) - defaultTableViewCellIndention * 2, height: heightForRowAtIndex(cellCoordinates.rowIndex)))
         cellLabel.text = tableViewDelegate!.tableView(self, titleForCellWithCoordinates: cellCoordinates)
         cellView.addSubview(cellLabel)
         tableViewCellViews.append(cellView)
     }
     
-    public func updateTableView() {
+    open func updateTableView() {
         for view in subviews {
             view.removeFromSuperview()
         }
@@ -148,42 +148,42 @@ public class TSTableView: UIScrollView {
         addTableViewCellViews()
     }
     
-    private func addTableViewHeaderViews() {
+    fileprivate func addTableViewHeaderViews() {
         createHeaderViews()
         for headerLabel in tableViewHeaderLabels {
             addSubview(headerLabel)
         }
     }
     
-    private func addTableViewRowViews() {
+    fileprivate func addTableViewRowViews() {
         createRows()
         for rowView in tableViewRowViews {
             addSubview(rowView)
         }
     }
     
-    private func addTableViewCellViews() {
+    fileprivate func addTableViewCellViews() {
         createCells()
         for cellView in tableViewCellViews {
             addSubview(cellView)
         }
     }
     
-    public func headerLabelForColumnAtIndex(index: TSTableViewColumnIndex) -> UILabel? {
+    open func headerLabelForColumnAtIndex(_ index: TSTableViewColumnIndex) -> UILabel? {
         if tableViewHeaderLabels.indices.contains(index) {
             return tableViewHeaderLabels[index]
         }
         return nil
     }
     
-    public func rowViewAtIndex(index: TSTableViewRowIndex) -> UIView? {
+    open func rowViewAtIndex(_ index: TSTableViewRowIndex) -> UIView? {
         if tableViewRowViews.indices.contains(index) {
             return tableViewRowViews[index]
         }
         return nil
     }
     
-    public func cellViewForCellWithCoordinates(cellCoordinates: TSTableViewCellCoordinate) -> UIView? {
+    open func cellViewForCellWithCoordinates(_ cellCoordinates: TSTableViewCellCoordinate) -> UIView? {
         let tableViewCellViewsIndex = cellCoordinates.rowIndex * tableViewDelegate!.numberOfColumnsInTableView(self) + cellCoordinates.columnIndex
         if tableViewCellViews.indices.contains(tableViewCellViewsIndex) {
             return tableViewCellViews[tableViewCellViewsIndex]

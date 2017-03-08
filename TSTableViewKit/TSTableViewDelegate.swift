@@ -10,18 +10,18 @@ import Foundation
 
 @objc public protocol TSTableViewDelegate {
     
-    func numberOfRowsInTableView(tableView: TSTableView) -> Int
+    func numberOfRowsInTableView(_ tableView: TSTableView) -> Int
     
-    func numberOfColumnsInTableView(tableView: TSTableView) -> Int
+    func numberOfColumnsInTableView(_ tableView: TSTableView) -> Int
     
-    func tableView(tableView: TSTableView, titleForColumnHeaderAtIndex index: TSTableViewColumnIndex) -> String
+    func tableView(_ tableView: TSTableView, titleForColumnHeaderAtIndex index: TSTableViewColumnIndex) -> String
     
-    func tableView(tableView: TSTableView, titleForCellWithCoordinates cellCoordinates: TSTableViewCellCoordinate) -> String
+    func tableView(_ tableView: TSTableView, titleForCellWithCoordinates cellCoordinates: TSTableViewCellCoordinate) -> String
     
-    optional func tableView(tableView: TSTableView, heightForRowAtIndex index: TSTableViewRowIndex) -> CGFloat
+    @objc optional func tableView(_ tableView: TSTableView, heightForRowAtIndex index: TSTableViewRowIndex) -> CGFloat
     
-    optional func tableView(tableView: TSTableView, widthForColumnAtIndex index: TSTableViewColumnIndex) -> CGFloat
+    @objc optional func tableView(_ tableView: TSTableView, widthForColumnAtIndex index: TSTableViewColumnIndex) -> CGFloat
     
-    optional func tableView(tableView: TSTableView, viewForCellWithCoordinates cellCoordinates: TSTableViewCellCoordinate) -> UIView?
+    @objc optional func tableView(_ tableView: TSTableView, viewForCellWithCoordinates cellCoordinates: TSTableViewCellCoordinate) -> UIView?
     
 }
